@@ -40,63 +40,138 @@ public struct CellBuilder {
     struct TestView: View {
         var body: some View {
             List {
-                label()
-                labels()
+                labelView()
+                tableViewCell()
+                collectionViewCell()
+                tableViewCells()
+                collectionViewCells()
             }
         }
 
         @CellBuilder
-        func label() -> some View {
-            LabelTableViewCell { cell in
-                cell.label.text = "SwiftUI View"
+        func labelView() -> some View {
+            LabelView { view in
+                view.label.text = "SwiftUI View UIView"
             }
         }
 
         @CellBuilder
-        func labels() -> some View {
+        func tableViewCell() -> some View {
             LabelTableViewCell { cell in
-                cell.label.text = "first"
+                cell.label.text = "SwiftUI View TableViewCell"
+            }
+        }
+
+        @CellBuilder
+        func collectionViewCell() -> some View {
+            LabelCollectionViewCell { cell in
+                cell.label.text = "SwiftUI View CollectionViewCell"
+            }
+        }
+
+        @CellBuilder
+        func tableViewCells() -> some View {
+            LabelTableViewCell { cell in
+                cell.label.text = "first TableViewCell"
             }
             LabelTableViewCell { cell in
-                cell.label.text = "second"
+                cell.label.text = "second TableViewCell"
             }
             LabelTableViewCell { cell in
-                cell.label.text = "third"
+                cell.label.text = "third TableViewCell"
+            }
+        }
+
+        @CellBuilder
+        func collectionViewCells() -> some View {
+            LabelCollectionViewCell { cell in
+                cell.label.text = "first CollectionViewCell"
+            }
+            LabelCollectionViewCell { cell in
+                cell.label.text = "second CollectionViewCell"
+            }
+            LabelCollectionViewCell { cell in
+                cell.label.text = "third CollectionViewCell"
             }
         }
     }
 
-class LabelTableViewCell: UITableViewCell {
-    lazy var label = addLabel()
+    class LabelTableViewCell: UITableViewCell {
+        lazy var label = addLabel()
 
-    func addLabel() -> UILabel {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+        func addLabel() -> UILabel {
+            let label = UILabel()
+            label.numberOfLines = 0
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }
+
+        override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+            super.init(style: style, reuseIdentifier: reuseIdentifier)
+            contentView.addSubview(label)
+            NSLayoutConstraint.activate([
+                label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+                label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+                label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+                label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            ])
+        }
+
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
     }
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
-        ])
+    class LabelCollectionViewCell: UICollectionViewCell {
+        lazy var label = addLabel()
+
+        func addLabel() -> UILabel {
+            let label = UILabel()
+            label.numberOfLines = 0
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }
+
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            contentView.addSubview(label)
+            NSLayoutConstraint.activate([
+                label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+                label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+                label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+                label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            ])
+        }
+
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    class LabelView: UIView {
+        lazy var label = addLabel()
 
-    func setup() {
-        self.backgroundColor = .red
-        // Set the text for the label
-        label.text = "jbhkndcdxeeclm njxndjn kcdnkn \n njncjdnc \n djcnjcnd \n jncjdncjdnc \n cjdnjdnc\n jncjdncjdnc \n cjdnjdnc"
-    }
-}
+        func addLabel() -> UILabel {
+            let label = UILabel()
+            label.numberOfLines = 0
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }
 
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            addSubview(label)
+            NSLayoutConstraint.activate([
+                label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+                label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+                label.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+                label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+            ])
+        }
+
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }
     return TestView()
 }

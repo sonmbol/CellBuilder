@@ -1,8 +1,8 @@
 //
-//  UITableViewCell+Helper.swift
+//  CellConfigurable.swift
 //  CellBuilder
 //
-//  Created by ahmed suliman on 16/12/2024.
+//  Created by ahmed suliman on 17/12/2024.
 //
 
 import UIKit
@@ -27,7 +27,10 @@ public struct CellProvider: CellProviderProtocol {
     }
 }
 
-public protocol CellConfigurable: UITableViewCell { }
+public protocol CellConfigurable: UIView {
+    init()
+    static func createCell(provider: CellProviderProtocol?) -> Self
+}
 
 public extension CellConfigurable {
     func callAsFunction(_ configuration: @escaping (Self) -> Void) -> (Self) -> Void {
@@ -35,7 +38,7 @@ public extension CellConfigurable {
     }
 }
 
-extension UITableViewCell: CellConfigurable {
+extension CellConfigurable {
     private static func isCellFromNib(provider: CellProviderProtocol?) -> Bool {
         let className = provider?.identifier ?? String(describing: type(of: self))
         return provider?.bundle?.path(forResource: className, ofType: "nib") != nil
@@ -50,7 +53,7 @@ extension UITableViewCell: CellConfigurable {
         return cell
     }
 
-    static func createCell(provider: CellProviderProtocol?) -> Self {
+    public static func createCell(provider: CellProviderProtocol?) -> Self {
         if isCellFromNib(provider: provider) {
             return loadFromNib(provider: provider)
         } else {
@@ -59,3 +62,4 @@ extension UITableViewCell: CellConfigurable {
     }
 }
 
+extension UIView: CellConfigurable { }

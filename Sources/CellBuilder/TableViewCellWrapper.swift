@@ -8,15 +8,15 @@
 import SwiftUI
 import UIKit
 
-public struct TableViewCellWrapper<UITableViewCellType: CellConfigurable>: UIViewRepresentable {
-    public let configure: (UITableViewCellType) -> Void
+public struct TableViewCellWrapper<CellType: CellConfigurable>: UIViewRepresentable {
+    public let configure: (CellType) -> Void
 
-    public init(configure: @escaping (UITableViewCellType) -> Void = { _ in }) {
+    public init(configure: @escaping (CellType) -> Void = { _ in }) {
         self.configure = configure
     }
 
     public func makeUIView(context: Context) -> ContainerView {
-        let cell = UITableViewCellType.createCell(provider: (UITableViewCellType.self as? CellProviderProtocol))
+        let cell = CellType.createCell(provider: (CellType.self as? CellProviderProtocol))
         configure(cell)
         cell.setNeedsLayout()
         cell.layoutIfNeeded()
@@ -48,9 +48,9 @@ public struct TableViewCellWrapper<UITableViewCellType: CellConfigurable>: UIVie
 
 public extension TableViewCellWrapper {
     final class ContainerView: UIView {
-        let cell: UITableViewCellType
+        let cell: CellType
 
-        init(cell: UITableViewCellType) {
+        init(cell: CellType) {
             self.cell = cell
             super.init(frame: .zero)
         }
