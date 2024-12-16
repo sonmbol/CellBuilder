@@ -18,11 +18,10 @@ dependencies: [
     .package(url: "https://github.com/sonmbol/CellBuilder.git", from: "1.0.0")
 ]
 
----
+```
 
 #### CocoaPods
 
-```markdown
 ### CocoaPods
 
 To integrate `CellBuilder` using CocoaPods, add the following to your `Podfile`:
@@ -37,11 +36,10 @@ target 'YourAppTargetName' do
 end
 Run pod install to install the dependencies.
 
----
+```
 
 ### Usage
 
-```markdown
 ## Usage
 
 The idea behind `CellBuilder` is to convert any `UITableViewCell` into a `SwiftUI` view, making it configurable and responsive to `Publisher`. Here's a quick example to get you started:
@@ -58,12 +56,9 @@ func label() -> some View {
     }
 }
 
----
+```
 
 ##### Multiple Cells
-
-```markdown
-#### Multiple Cells
 
 ```swift
 @CellBuilder
@@ -79,11 +74,10 @@ func labels() -> some View {
     }
 }
 
----
+```
 
 ### How It Works
 
-```markdown
 ## How It Works
 
 - **Extraction**: The `UITableViewCell` is first extracted as a `UIView`.
