@@ -1,12 +1,12 @@
 # CellBuilder
 
-**CellBuilder** is a powerful Swift framework designed to convert any `UITableViewCell` into a `SwiftUI` view, making it configurable and responsive to `Publisher`. It simplifies the process of integrating your existing `UITableViewCell` components into `SwiftUI`, enhancing your development journey with efficiency and excitement.
+**CellBuilder** is a powerful Swift framework designed to convert any `UIView`, `UITableViewCell`, or `UICollectionViewCell` into a `SwiftUI` view, making it configurable and responsive to `Publisher`. It simplifies the process of integrating your existing `UIView`, `UITableViewCell`, or `UICollectionViewCell` components into `SwiftUI`, enhancing your development journey with efficiency and excitement.
 
 ## Features
 
-- **Seamless Integration**: Convert any `UITableViewCell` to a `SwiftUI` view.
+- **Seamless Integration**: Convert any `UIView`, `UITableViewCell`, or `UICollectionViewCell` to a `SwiftUI` view.
 - **Configurable and Responsive**: Fully compatible with `SwiftUI` and responsive to `Publisher`.
-- **Result Builder**: Simplifies the implementation of `UITableViewCell` as `SwiftUI` view using `CellBuilder`.
+- **Result Builder**: Simplifies the implementation of `UIView`, `UITableViewCell`, or `UICollectionViewCell` as `SwiftUI` view using `CellBuilder`.
 
 ## Installation
 ### Swift Package Manager
@@ -15,7 +15,7 @@ To integrate `CellBuilder` into your project using Swift Package Manager, add th
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/sonmbol/CellBuilder.git", from: "1.0.0")
+    .package(url: "https://github.com/sonmbol/CellBuilder.git", from: "1.0.1")
 ]
 
 ```
@@ -42,7 +42,7 @@ Run pod install to install the dependencies.
 
 ## Usage
 
-The idea behind `CellBuilder` is to convert any `UITableViewCell` into a `SwiftUI` view, making it configurable and responsive to `Publisher`. Here's a quick example to get you started:
+The idea behind `CellBuilder` is to convert any `UIView`, `UITableViewCell`, or `UICollectionViewCell` into a `SwiftUI` view, making it configurable and responsive to `Publisher`. Here's a quick example to get you started:
 
 ### Example
 
@@ -50,9 +50,23 @@ The idea behind `CellBuilder` is to convert any `UITableViewCell` into a `SwiftU
 
 ```swift
 @CellBuilder
-func label() -> some View {
+func labelView() -> some View {
+    LabelView { view in
+        view.label.text = "SwiftUI View UIView"
+    }
+}
+
+@CellBuilder
+func tableViewCell() -> some View {
     LabelTableViewCell { cell in
-        cell.label.text = "Welcome to SwiftUI"
+        cell.label.text = "SwiftUI View TableViewCell"
+    }
+}
+
+@CellBuilder
+func collectionViewCell() -> some View {
+    LabelCollectionViewCell { cell in
+        cell.label.text = "SwiftUI View CollectionViewCell"
     }
 }
 
@@ -62,15 +76,41 @@ func label() -> some View {
 
 ```swift
 @CellBuilder
-func labels() -> some View {
+func labelViews() -> some View {
+    LabelView { cell in
+        cell.label.text = "first UIView"
+    }
+    LabelView { cell in
+        cell.label.text = "second UIView"
+    }
+    LabelView { cell in
+        cell.label.text = "third UIView"
+    }
+}
+
+@CellBuilder
+func tableViewCells() -> some View {
     LabelTableViewCell { cell in
-        cell.label.text = "First"
+        cell.label.text = "first TableViewCell"
     }
     LabelTableViewCell { cell in
-        cell.label.text = "Second"
+        cell.label.text = "second TableViewCell"
     }
     LabelTableViewCell { cell in
-        cell.label.text = "Third"
+        cell.label.text = "third TableViewCell"
+    }
+}
+
+@CellBuilder
+func collectionViewCells() -> some View {
+    LabelCollectionViewCell { cell in
+        cell.label.text = "first CollectionViewCell"
+    }
+    LabelCollectionViewCell { cell in
+        cell.label.text = "second CollectionViewCell"
+    }
+    LabelCollectionViewCell { cell in
+        cell.label.text = "third CollectionViewCell"
     }
 }
 
@@ -78,12 +118,10 @@ func labels() -> some View {
 
 ### How It Works
 
-## How It Works
-
-- **Extraction**: The `UITableViewCell` is first extracted as a `UIView`.
+- **Extraction**: The `UIView`, `UITableViewCell`, or `UICollectionViewCell` is first extracted as a `UIView`.
 - **Container**: A container is added around it to override `intrinsicContentSize` since `SwiftUI` respects the size only, not the constraint.
 - **Content Integration**: The cell content is added inside the container.
 - **Result Builder**: To make the view easy to use in `SwiftUI`, a result builder called `CellBuilder` is used.
 
-By following this approach, you can easily integrate your existing `UITableViewCell` components into `SwiftUI`, making your development process smoother and more efficient.
+By following this approach, you can easily integrate your existing `UIView`, `UITableViewCell`, or `UICollectionViewCell` components into `SwiftUI`, making your development process smoother and more efficient.
 
