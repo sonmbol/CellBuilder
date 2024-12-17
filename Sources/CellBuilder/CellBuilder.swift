@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 14.0, *)
 @resultBuilder
 public struct CellBuilder {
     public static func buildBlock<T: CellConfigurable>(_ component: @escaping (T) -> Void) -> some View {
@@ -35,7 +36,7 @@ public struct CellBuilder {
 }
 
 
-
+@available(iOS 14.0, *)
 #Preview {
     struct TestView: View {
         var body: some View {

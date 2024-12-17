@@ -7,16 +7,19 @@
 
 import UIKit
 
+@available(iOS 14.0, *)
 public protocol CellProviderProtocol {
     var identifier: String? { get }
     var bundle: Bundle? { get }
 }
 
+@available(iOS 14.0, *)
 public extension CellProviderProtocol {
     var identifier: String? { nil }
     var bundle: Bundle? { nil }
 }
 
+@available(iOS 14.0, *)
 public struct CellProvider: CellProviderProtocol {
     public let identifier: String?
     public let bundle: Bundle?
@@ -27,17 +30,20 @@ public struct CellProvider: CellProviderProtocol {
     }
 }
 
+@available(iOS 14.0, *)
 public protocol CellConfigurable: UIView {
     init()
     static func createCell(provider: CellProviderProtocol?) -> Self
 }
 
+@available(iOS 14.0, *)
 public extension CellConfigurable {
     func callAsFunction(_ configuration: @escaping (Self) -> Void) -> (Self) -> Void {
         configuration
     }
 }
 
+@available(iOS 14.0, *)
 extension CellConfigurable {
     private static func isCellFromNib(provider: CellProviderProtocol?) -> Bool {
         let className = provider?.identifier ?? String(describing: type(of: self))
@@ -62,4 +68,5 @@ extension CellConfigurable {
     }
 }
 
+@available(iOS 14.0, *)
 extension UIView: CellConfigurable { }

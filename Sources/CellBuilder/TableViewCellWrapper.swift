@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 
+@available(iOS 14.0, *)
 public struct TableViewCellWrapper<CellType: CellConfigurable>: UIViewRepresentable {
     public let configure: (CellType) -> Void
 
@@ -46,6 +47,7 @@ public struct TableViewCellWrapper<CellType: CellConfigurable>: UIViewRepresenta
     }
 }
 
+@available(iOS 14.0, *)
 public extension TableViewCellWrapper {
     final class ContainerView: UIView {
         let cell: CellType

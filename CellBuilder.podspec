@@ -1,7 +1,7 @@
 Pod::Spec.new do |c|
   c.name             = 'CellBuilder'
-  c.version          = '1.0.0'
-  c.summary          = "If you're eager to integrate your existing UITableViewCell components into SwiftUI, then this framework is just what you need! Let's make your development journey both exciting and efficient!"
+  c.version          = '1.0.1'
+  c.summary          = "If you're eager to integrate your existing UIView, UITableViewCell or UICollectionViewCell components into SwiftUI, then this framework is just what you need! Let's make your development journey both exciting and efficient!"
   c.homepage         = 'https://github.com/sonmbol/CellBuilder'
   c.license          = { :type => 'MIT', :file => 'LICENSE' }
   c.author           = { 'Ahmed Suliman' => 'dev.a7med95@gmail.com' }
