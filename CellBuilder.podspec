@@ -1,6 +1,6 @@
 Pod::Spec.new do |c|
   c.name             = 'CellBuilder'
-  c.version          = '1.1.0'
+  c.version          = '1.0.0'
   c.summary          = "SwiftUI framework to integrate UIView, UITableViewCell, and UICollectionViewCell components."
   c.homepage         = 'https://github.com/sonmbol/CellBuilder'
   c.license          = { :type => 'MIT', :file => 'LICENSE' }
