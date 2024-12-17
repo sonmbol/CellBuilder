@@ -60,7 +60,7 @@ public extension DynamicCellWrapper {
         }
 
         public override var intrinsicContentSize: CGSize {
-            let targetSize = CGSize(width: frame.width, height: UIView.layoutFittingCompressedSize.height)
+            let targetSize = CGSize(width: bounds.width, height: UIView.layoutFittingCompressedSize.height)
             let fittingSize = cell.systemLayoutSizeFitting(
                 targetSize,
                 withHorizontalFittingPriority: .required,
