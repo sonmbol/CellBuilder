@@ -1,7 +1,7 @@
 Pod::Spec.new do |c|
   c.name             = 'CellBuilder'
   c.version          = '1.1.0'
-  c.summary          = "If you're eager to integrate your existing UIView, UITableViewCell or UICollectionViewCell components into SwiftUI, then this framework is just what you need! Let's make your development journey both exciting and efficient!"
+  c.summary          = "SwiftUI framework to integrate UIView, UITableViewCell, and UICollectionViewCell components."
   c.homepage         = 'https://github.com/sonmbol/CellBuilder'
   c.license          = { :type => 'MIT', :file => 'LICENSE' }
   c.author           = { 'Ahmed Suliman' => 'dev.a7med95@gmail.com' }
@@ -10,4 +10,5 @@ Pod::Spec.new do |c|
   c.swift_version = '5.0'
   c.source_files = 'Sources/**/*'
   c.platform = :ios
+  c.frameworks = 'UIKit'
 end
