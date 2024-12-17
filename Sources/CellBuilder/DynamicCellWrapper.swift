@@ -1,5 +1,5 @@
 //
-//  TableViewCellWrapper.swift
+//  DynamicCellWrapper.swift
 //
 //
 //  Created by ahmed suliman on 16/12/2024.
@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 @available(iOS 14.0, *)
-public struct TableViewCellWrapper<CellType: CellConfigurable>: UIViewRepresentable {
+public struct DynamicCellWrapper<CellType: CellConfigurable>: UIViewRepresentable {
     public let configure: (CellType) -> Void
 
     public init(configure: @escaping (CellType) -> Void = { _ in }) {
@@ -19,8 +19,6 @@ public struct TableViewCellWrapper<CellType: CellConfigurable>: UIViewRepresenta
     public func makeUIView(context: Context) -> ContainerView {
         let cell = CellType.createCell(provider: (CellType.self as? CellProviderProtocol))
         configure(cell)
-        cell.setNeedsLayout()
-        cell.layoutIfNeeded()
 
         let containerView = ContainerView(cell: cell)
         cell.translatesAutoresizingMaskIntoConstraints = false
@@ -33,22 +31,17 @@ public struct TableViewCellWrapper<CellType: CellConfigurable>: UIViewRepresenta
             containerView.bottomAnchor.constraint(equalTo: cell.bottomAnchor)
         ])
 
-        containerView.setNeedsUpdateConstraints()
-
         return containerView
     }
 
     public func updateUIView(_ uiView: ContainerView, context: Context) {
         let cell = uiView.cell
         configure(cell)
-        cell.setNeedsLayout()
-        cell.layoutIfNeeded()
-        cell.frame = uiView.bounds
     }
 }
 
 @available(iOS 14.0, *)
-public extension TableViewCellWrapper {
+public extension DynamicCellWrapper {
     final class ContainerView: UIView {
         let cell: CellType
 
@@ -63,7 +56,7 @@ public extension TableViewCellWrapper {
 
         public override func layoutSubviews() {
             super.layoutSubviews()
-            cell.frame = bounds
+            invalidateIntrinsicContentSize()
         }
 
         public override var intrinsicContentSize: CGSize {

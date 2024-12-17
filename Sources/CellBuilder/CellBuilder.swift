@@ -11,27 +11,27 @@ import SwiftUI
 @resultBuilder
 public struct CellBuilder {
     public static func buildBlock<T: CellConfigurable>(_ component: @escaping (T) -> Void) -> some View {
-        TableViewCellWrapper(configure: component)
+        DynamicCellWrapper(configure: component)
     }
 
     public static func buildBlock<T: CellConfigurable>(_ components: ((T) -> Void)...) -> some View {
         ForEach(components.indices, id: \.self) { index in
             let component = components[index]
-            TableViewCellWrapper(configure: component)
+            DynamicCellWrapper(configure: component)
         }
     }
 
     public static func buildEither<T: CellConfigurable>(first component: @escaping (T) -> Void) -> some View {
-        TableViewCellWrapper(configure: component)
+        DynamicCellWrapper(configure: component)
     }
 
     public static func buildEither<T: CellConfigurable>(second component: @escaping (T) -> Void) -> some View {
-        TableViewCellWrapper(configure: component)
+        DynamicCellWrapper(configure: component)
     }
 
     public static func buildOptional<T: CellConfigurable>(_ component: ((T) -> Void)?) -> some View {
         let component = component ?? {_ in}
-        return TableViewCellWrapper(configure: component)
+        return DynamicCellWrapper(configure: component)
     }
 }
 
