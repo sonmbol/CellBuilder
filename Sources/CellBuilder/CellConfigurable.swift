@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUICore
 
 @available(iOS 14.0, *)
 public protocol CellProviderProtocol {
@@ -40,6 +41,10 @@ public protocol CellConfigurable: UIView {
 public extension CellConfigurable {
     func callAsFunction(_ configuration: @escaping (Self) -> Void) -> (Self) -> Void {
         configuration
+    }
+
+    static func makeView(_ configuration: @escaping (Self) -> Void) -> some View {
+        DynamicCellWrapper(configure: configuration)
     }
 }
 

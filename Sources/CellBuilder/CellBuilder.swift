@@ -14,6 +14,10 @@ public struct CellBuilder {
         DynamicCellWrapper(configure: component)
     }
 
+    public static func buildBlock<T: CellConfigurable>(_ component: T) -> some View {
+        DynamicCellWrapper<T> { _ in }
+    }
+
     public static func buildBlock<T: CellConfigurable>(_ components: ((T) -> Void)...) -> some View {
         ForEach(components.indices, id: \.self) { index in
             let component = components[index]
@@ -41,12 +45,21 @@ public struct CellBuilder {
     struct TestView: View {
         var body: some View {
             List {
+                LabelTableViewCell.makeView { view in
+                    view.label.text = "make SwiftUI View"
+                }
+                emptyLabelView()
                 labelView()
                 tableViewCell()
                 collectionViewCell()
                 tableViewCells()
                 collectionViewCells()
             }
+        }
+
+        @CellBuilder
+        func emptyLabelView() -> some View {
+            LabelView()
         }
 
         @CellBuilder
