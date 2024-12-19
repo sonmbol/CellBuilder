@@ -1,6 +1,6 @@
 Pod::Spec.new do |c|
   c.name             = 'CellBuilder'
-  c.version          = '1.0.1'
+  c.version          = '1.0.2'
   c.summary          = "SwiftUI framework to integrate UIView, UITableViewCell, and UICollectionViewCell components."
   c.homepage         = 'https://github.com/sonmbol/CellBuilder'
   c.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -9,6 +9,6 @@ Pod::Spec.new do |c|
   c.ios.deployment_target = '14.0'
   c.swift_version = '5.0'
   c.source_files = 'Sources/**/*'
-  c.platform = :ios
+  c.platform = :ios , '14.0'
   c.frameworks = 'UIKit'
 end
