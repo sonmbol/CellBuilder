@@ -43,7 +43,7 @@ public extension CellConfigurable {
         configuration
     }
 
-    static func makeView(_ configuration: @escaping (Self) -> Void) -> some View {
+    static func makeView(_ configuration: @escaping (Self) -> Void = { _ in }) -> some View {
         DynamicCellWrapper(configure: configuration)
     }
 }
