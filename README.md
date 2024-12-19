@@ -45,8 +45,51 @@ Run pod install to install the dependencies.
 The idea behind `CellBuilder` is to convert any `UIView`, `UITableViewCell`, or `UICollectionViewCell` into a `SwiftUI` view, making it configurable and responsive to `Publisher`. Here's a quick example to get you started:
 
 ### Example
+#### Make View
 
-#### Single Cell
+```swift
+var body: some View {
+    List {
+        LabelView.makeView { view in
+            view.label.text = "make SwiftUI View"
+        }
+        emptyLabelView()
+        labelView()
+        tableViewCell()
+        collectionViewCell()
+        tableViewCells()
+        collectionViewCells()
+    }
+}
+
+class LabelView: UIView {
+    lazy var label = addLabel()
+
+    func addLabel() -> UILabel {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(label)
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            label.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+        ])
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+```
+#### CellBuilder for Single Cell
 
 ```swift
 @CellBuilder
@@ -72,7 +115,7 @@ func collectionViewCell() -> some View {
 
 ```
 
-##### Multiple Cells
+##### CellBuilder for Multiple Cells
 
 ```swift
 @CellBuilder

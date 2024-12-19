@@ -45,7 +45,7 @@ public struct CellBuilder {
     struct TestView: View {
         var body: some View {
             List {
-                LabelTableViewCell.makeView { view in
+                LabelView.makeView { view in
                     view.label.text = "make SwiftUI View"
                 }
                 emptyLabelView()
